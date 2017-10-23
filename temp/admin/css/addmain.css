@@ -1,0 +1,7 @@
+body {
+  background: #DBE5EE;
+  padding: 10px;
+}
+.tbhead{background:url(../images/table.jpg) repeat-x;padding:0 0 0 10px;font-weight:bold;}
+.newtable{padding:5px 20px 10px 20px;background:#fff;}
+.dott{border-bottom:1px #c4d6d7 dotted;}

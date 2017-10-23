@@ -1,0 +1,19 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>保证</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/general.css" rel="stylesheet" type="text/css" />
+<script src="/js/common.js"></script>
+</head>
+<body>
+<form name="frm" action="process.php?Actions=modifyPermission&adminID={$iAdminID}" method="post">
+    <ul>
+		{section name=loop loop=$pList}
+      <li><input type="checkbox" name="permission[]" value="{$pList[loop].sCode}" {$pList[loop].sChecked}>{$pList[loop].sName}</li>
+	  {/section}
+      <li><input type="submit" value="确定"></li>
+    </ul> 
+</form>
+</body>
+</html>

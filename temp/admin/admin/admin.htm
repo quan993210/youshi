@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>添加管理员</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery-1.4.2.min.js"></script>
+{literal}
+<script language="javascript">
+	function sel_p(type)
+	{
+		if (type == 0)
+		{
+			$("#p1").css("display", "");
+			$("#p2").css("display", "none");
+		}
+		else
+		{
+			$("#p1").css("display", "none");
+			$("#p2").css("display", "");
+		}
+	}
+</script>
+{/literal}
+</head>
+<body>
+<h1>
+<span class="action-span"><a href="javascript:history.back();">返回</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<div id="tabbody-div">
+<form name="frm" action="admin.php" method="post" autoComplete="Off">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr>
+      <td class="label">用户名：</td>
+	  <td><input type="text" name="username" value="{$admin.userid}"></td>
+    </tr>
+    {if $action eq 'do_add_admin'}
+	<tr>
+      <td class="label">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+	  <td><input type="password" name="pwd" value=""></td>
+    </tr>
+	<tr>
+      <td class="label">确认密码：</td>
+	  <td><input type="password" name="cfm_pwd" value=""></td>
+    </tr>
+    {else}
+    <tr>
+      <td class="label">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+	  <td><input type="password" name="pwd" value=""> (留空表示不修改)</td>
+    </tr>
+    {/if}
+    <tr>
+      <td class="label">邮箱：</td>
+	  <td><input type="text" name="email" value="{$admin.email}"></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+      	<input type="hidden" value="{$action}" name="action" />
+      	<input type="hidden" value="{$now_page}" name="now_page" />
+      	<input type="hidden" value="{$admin.id}" name="id" />
+        <input type="submit" value="确定">
+      </td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+</html>

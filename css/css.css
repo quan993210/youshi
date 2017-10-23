@@ -1,0 +1,23 @@
+
+
+/* 效果CSS开始 */
+#container {width:543px;position:relative;z-index:0;background-image: url(../images/iphone2.png);background-repeat: no-repeat;background-position: center top;margin-top:70px;margin-right: auto;margin-bottom: 0;margin-left: auto;height: 737px;padding-top:113px;padding-left: 222px;}
+#example {width:329px;height:576px;position:relative;}
+#ribbon {position:absolute;top:-3px;left:-15px;z-index:500;}
+#frame {position:absolute;z-index:0;width:840px;height:341px;top:0px;left:0px;}
+#slides {position:absolute;z-index:100;}
+.slides_container {width:328px;overflow:hidden;position:relative;display:none;}
+.slides_container a {width:328px;height:492px;display:block;}
+.slides_container a img {display:block;}
+#slides .next,#slides .prev {position:absolute;top:200px;left:-160px;width:66px;height:66px;display:block;z-index:101;}
+#slides .next{background:url(../images/dd.png) no-repeat}
+#slides  .next:hover{background:url(../images/ddd.png) no-repeat}
+#slides .prev{background:url(../images/ccc.png) no-repeat}
+#slides  .prev:hover{background:url(../images/cc.png) no-repeat} 
+ 
+#slides .next {left:428px; }
+.pagination {margin:170px auto 0;width:165px;}
+.pagination li {float:left;margin:0 3px;list-style:none;}
+.pagination li a {display:block;width:11px;height:0;padding-top:12px;background:url(../images/lb.png) no-repeat;float:left;overflow:hidden;}
+.pagination li.cur a {background:url(../images/lbd.png) no-repeat}
+/* 效果CSS结束 */

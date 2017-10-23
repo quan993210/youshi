@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+    <script type="text/javascript" src="/js/plupload/plupload.full.min.js"></script>
+
+</head>
+<body>
+<h1>
+<span class="action-span"><a href="javascript:history.back();">返回</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<div id="tabbody-div">
+<form name="frm" action="timu_category.php" method="post">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr>
+      <td class="label">题目分类名称：</td>
+	  <td><input type="text" name="name" value="{$cat.name}"></td>
+    </tr>
+    <tr>
+        <td class="label">分类图片：</td>
+        <td>
+            <!--<input type="file" name="pic" value="">-->
+            <img src="{if $cat.logo neq ''}{$url_path}{$cat.logo}{else}/images/default_news.jpg{/if}" id="upload_logo" style="width:150px;height:100px;border: 1px solid #ccc;padding: 3px;border-radius: 5px;" /><br/>
+            <input type="hidden" value="{$cat.logo}" name="logo_path" id="logo_path" />
+            <input type="button" id="pickfiles" style="background:#fff;width:76px;height:24px;border:0;cursor:pointer;border:1px solid #CCC;margin:5px 0;margin-bottom:10px;" value="上传图片" />
+            <div style="color:#ff0000">图片大小为710px*428px</div>
+        </td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="hidden" value="{$cat.id}" name="id" />
+      	<input type="hidden" value="{$action}" name="action" />
+      	<input type="hidden" value="{$now_page}" name="now_page" />
+      	<input type="submit" value="添加">
+      </td>
+    </tr>
+</table>
+</form>
+</div>
+{literal}
+<script type="text/javascript">
+    var uploader = new plupload.Uploader({
+        runtimes : 'html5,flash,silverlight,html4',
+        browse_button : 'pickfiles', // you can pass in id...
+        url : 'timu_category.php?action=upload_batch_photo&dir_type=timu&upload_name=logo',
+        flash_swf_url : '/js/plupload/Moxie.swf',
+        silverlight_xap_url : '/js/plupload/Moxie.xap',
+        file_data_name : 'logo',
+        multi_selection : false,
+
+        filters : {
+            max_file_size : '10mb',
+            mime_types: [
+                {title : "Image files", extensions : "jpg,gif,png"},
+                {title : "Zip files", extensions : "zip"}
+            ]
+        },
+
+        init: {
+            PostInit: function() {
+                //document.getElementById('filelist').innerHTML = '';
+
+                /*document.getElementById('uploadfiles').onclick = function() {
+                 uploader.start();
+                 return false;
+                 };*/
+            },
+
+            FilesAdded: function(up, files) {
+
+                plupload.each(files, function(file) {
+                    //document.getElementById('filelist').innerHTML += '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+
+                    var html = '<tr id="' + file.id + '">';
+                    html += '<td width="200" align="left">' + file.name + '</td>';
+                    html += '<td width="100" align="center">' + plupload.formatSize(file.size) + '</td>';
+                    html += '<td width="100" align="center" id="' + file.id + '_progress"></td>';
+                    html += '</tr>';
+
+                    //$("#uploadlist").append(html);
+                    //$("#uploadlist").html(html);
+                });
+
+                uploader.start();
+            },
+
+            UploadProgress: function(up, file) {
+                //document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+                $("#" + file.id + "_progress").html(file.percent + "%");
+            },
+
+            FileUploaded: function(up, file, data) {
+                //alert(data.response.logo_path);
+                var dataObj = eval("(" + data.response + ")");
+                // console.log(dataObj)
+                //alert(dataObj.pic_path);
+                //var piclist = $("#piclist").val();
+                //piclist += piclist == "" ? dataObj.logo_path : "|" + dataObj.logo_path;
+                $("#logo_path").val(dataObj.pic_path);
+                $("#upload_logo").attr("src", dataObj.pic_path);
+            },
+
+            Error: function(up, err) {
+                document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+            }
+        }
+    });
+
+    uploader.init();
+</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="{$url_path}/js/jquery.js"></script>
+<link href="{$admin_temp_path}/css/menu.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!--<div class="tit">
+	<div>
+    	<img src="{$admin_temp_path}/images/set.png" style="" /> 内容管理
+	</div>
+</div>-->
+<div class="wrap">
+	{section name=loop loop=$menu}
+	<div class="{if $smarty.section.loop.index eq 0}curmenu{else}menu{/if}" onclick="show_children_menu(this);"><span>{$menu[loop].name}</span></div>
+	<ul style="display:{if $smarty.section.loop.index neq 0}none{/if}">
+    	{section name=subloop loop=$menu[loop].sub}
+        <li><a href="{$menu[loop].sub[subloop].url}" target="main-frame">{$menu[loop].sub[subloop].name}</a></li>
+        {/section}
+    </ul>
+	{/section}
+</div>
+</body>
+</html>
+{literal}
+<script language="javascript">
+$(document).ready(function(){
+	$(".wrap ul li a").click(function(){
+		$(".wrap ul li a").prop("class", "");
+		$(this).prop("class", "cur");
+	});
+});
+function show_children_menu(obj)
+{
+	var index = $(".wrap div").index($(obj));
+	var classname = $(obj).prop("class");
+	if (classname == "curmenu")
+	{
+		$(obj).prop("class", "menu");
+		$(".wrap ul").eq(index).hide();
+	}
+	else
+	{
+		$(obj).prop("class", "curmenu");
+		$(".wrap ul").eq(index).show();
+	}
+	
+	
+	//alert($(obj).parent().find("div").index());
+	//alert($('#menu'+id).css('display'));
+	/*if ($('#menu'+id).css('display') == 'block')
+		$('#menu'+id).hide();
+	else
+		$('#menu'+id).show();*/
+}
+</script>
+{/literal}

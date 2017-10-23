@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+<script src="{$url_path}/js/editor/kindeditor.js" charset="utf-8"></script>
+<script src="{$url_path}/js/editor/lang/zh_CN.js" charset="utf-8"></script>
+<script type="text/javascript" src="{$url_path}/js/plupload/plupload.full.min.js"></script>
+{literal}
+<style>
+.pic-list div{float:left;margin-right:10px;text-align:center;}
+.pic-list img{width:150px;height:100px;border: 1px solid #ccc;padding: 3px;border-radius: 5px;}
+.upload-img{width:150px;height:100px;border: 1px solid #ccc;padding: 3px;border-radius: 5px;}
+.upload-btn{background:#fff;width:76px;height:24px;border:0;cursor:pointer;border:1px solid #CCC;margin:5px 0;margin-bottom:10px;}
+</style>
+{/literal}
+</head>
+<body>
+<h1>
+<span class="action-span"><a href="javascript:history.back();">返回</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<div id="tabbody-div">
+<form name="form" action="" method="post" enctype="multipart/form-data">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr>
+      <td class="label">商户名称：</td>
+	  <td><input type="text" name="name" value="{$merchant.name}" size="32" /></td>
+    </tr>
+    <tr>
+      <td class="label">商户简介：</td>
+	  <td>
+      	<textarea id="brief" name="brief" style="width:300px;height:60px;">{$merchant.brief}</textarea>
+      </td>
+    </tr>
+	<tr>
+		<td class="label">商户LOGO：</td>
+		<td>
+			<img src="{if $merchant.logo neq ''}{$url_path}{$merchant.logo}{else}{$url_path}/images/default_article.jpg{/if}" id="logo_img" class="upload-img" /><br/>
+			<input type="hidden" value="{$merchant.logo}" name="logo_path" id="logo_path" />
+			<input type="button" id="logo_btn" class="upload-btn" value="上传LOGO" /> （尺寸：180*180）
+		</td>
+	</tr>
+    <tr>
+      <td class="label">商户联系人：</td>
+	  <td><input type="text" name="captain" value="{$merchant.captain}" size="32" /></td>
+    </tr>
+	<tr>
+		<td class="label">联系电话：</td>
+		<td><input type="text" name="phone" value="{$merchant.phone}" size="32" /></td>
+	</tr>
+	<tr>
+		<td class="label">商户地址：</td>
+		<td><input type="text" name="address" value="{$merchant.address}" size="32" /></td>
+	</tr>
+	<tr>
+		<td class="label">可领取金币：</td>
+		<td><input type="text" name="gold" value="{$merchant.gold}" size="32" /></td>
+	</tr>
+	<tr>
+		<td class="label">排序：</td>
+		<td><input type="text" name="rank" value="{$merchant.rank}" size="32" /></td>
+	</tr>
+    <tr>
+      <td colspan="2" align="center">
+      <input type="hidden" name="action" value="{$action}" />
+      <input type="hidden" name="id" value="{$merchant.id}" id="id" />
+      <input type="hidden" name="now_page" value="{$now_page}" />
+      <input type="submit" value="确定">      
+      </td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+{literal}
+<script type="text/javascript">
+var uploader2 = new plupload.Uploader({
+	runtimes : 'html5,flash,silverlight,html4',
+	browse_button : 'logo_btn', // you can pass in id...
+	url : 'merchant.php?action=upload_batch_photo&dir_type=case&upload_name=logo',
+	flash_swf_url : '/js/plupload/Moxie.swf',
+	silverlight_xap_url : '/js/plupload/Moxie.xap',
+	file_data_name : 'logo',
+	multi_selection : false,
+	
+	filters : {
+		max_file_size : '10mb',
+		mime_types: [
+			{title : "Image files", extensions : "jpg,gif,png"},
+			{title : "Zip files", extensions : "zip"}
+		]
+	},
+
+	init: {
+		PostInit: function() {
+		},
+
+		FilesAdded: function(up, files) {
+	
+			plupload.each(files, function(file) {
+			});
+			
+			uploader2.start();
+		},
+
+		UploadProgress: function(up, file) {
+		},
+		
+		FileUploaded: function(up, file, data) {
+			var dataObj = eval("(" + data.response + ")");
+			$("#logo_path").val(dataObj.pic_path);
+			$("#logo_img").attr("src", dataObj.pic_path);
+		},
+
+		Error: function(up, err) {
+			document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+		}
+	}
+});
+
+
+uploader2.init();
+
+</script>
+{/literal}
+</html>

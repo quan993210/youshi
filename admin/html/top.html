@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="js/jquery.js"></script>
+<link href="css/general.css" rel="stylesheet" type="text/css" />
+<link href="css/top.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header-div">
+  <div id="logo-div" style="font-size:24px;color:#fff;text-align:center"><img src="<?php echo $admin_temp_path; ?>/images/logo.jpg" /></div>
+  <div id="submenu-div"></div>
+</div>
+<div id="menu-div">
+  <ul>
+    <li class="fix-spacel"></li>
+	<li><a href="<?php echo URL_PATH; ?>"  target="_blank">前台首页</a></li>
+    <li class="fix-spacer"><span onclick="location.href='index.php?action=logout'"  style="cursor:pointer;float:right;">退出</span></li>
+  </ul>
+  <br class="clear" />
+</div>
+</body>
+<script>
+var url = location.href;
+var par = url.split("?")[1];
+var name = decodeURI(par.split("=")[1]);
+//$("#logo-div").html(name);
+</script>
+</html>

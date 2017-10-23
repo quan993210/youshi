@@ -1,0 +1,19 @@
+body{background:#f0f0f0;}
+body,div,p,form,ul,img,input,span,dd,dt {font-size:12px;margin:0;padding:0;}
+a{color:#636363;text-decoration:none;}
+a:hover{color:#1f60a0;}
+a.cur{color:#1f60a0;font-weight:bold;}
+
+.tit{background:#f7f7f7;height:40px;padding:22px 0 0 20px;border-bottom:3px solid #d5d5d5;}
+.tit div{font-family:'宋体';font-weight:bold;font-size:14px;color:#246eb7;}
+.tit img{vertical-align:bottom;}
+
+.wrap{background:#f0f0f0;padding-top:20px;}
+.wrap ul{list-style:square inside url(../images/disc.png);}
+.wrap ul li{height:18px;padding:12px 0 10px 40px;}
+
+.menu{height:18px;padding:12px 0 10px 20px;cursor:pointer;}
+.menu span{background:url(../images/trigray.png) left no-repeat;font-size:14px;font-family:'宋体';color:#414141;padding-left:15px;}
+
+.curmenu{height:18px;padding:12px 0 10px 20px;background:#1f60a0;font-size:14px;font-family:'宋体';color:#fff;cursor:pointer;}
+.curmenu span{background:url(../images/triwhite.png) left no-repeat;font-size:14px;font-family:'宋体';color:#fff;padding-left:15px;}

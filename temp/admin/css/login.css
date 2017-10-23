@@ -1,0 +1,10 @@
+body{background:#0d589c;}
+.wrap{width:500px;margin:0 auto;text-align:center;margin-top:12%}
+.line{margin:15px 0;}
+.sysname{font-size:30px;color:#fff;font-family:'微软雅黑';}
+.userid{background:url(../images/userid_input.png);width:351px;height:50px;margin:20px 0 20px 54px;padding:3px 0 0 50px;}
+.password{background:url(../images/pwd_input.png);width:351px;height:52px;border:0;margin:20px 0 20px 54px;padding:3px 0 0 50px;}
+.userid span, .password span{float:left;}
+.submit{background:url(../images/login_btn.png);width:401px;height:55px;border:0;cursor:pointer;margin-left:54px;}
+.submit:hover{background:url(../images/login_btn_hover.png) no-repeat;width:401px;height:55px;border:0;cursor:pointer;}
+input{border:0;width:340px;height:45px;line-height:45px;}

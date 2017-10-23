@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+<script src="{$url_path}/js/utils.js"></script>
+<script src="{$admin_temp_path}/js/listtable.js"></script>
+{literal}
+<script>
+	function search_check()
+	{
+		if($("search_cat").value != 0)
+		{			
+			if($("keyword").value == "")
+			{
+				alert("请填写搜索关键字");
+				$("keyword").focus();
+				return false;
+			}
+		}
+		else
+		{
+			alert('请选择搜索类型');
+			return false;
+		}
+		return true;
+	}
+	
+	function check()
+	{
+		if(confirm("您确认删除这些吗？"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function check_del(url)
+	{
+		if(confirm("您是否确认删除该管理员！"))
+		{
+			location.href = url;
+		}
+		
+		
+		return;
+	}
+</script>
+{/literal}
+</head>
+<h1>
+<span class="action-span"><a href="admin.php?action=add_admin">添加管理员</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<body>
+<form method="post" action="admin.php?action=del_sel_admin" name="listForm" onsubmit="return check()">
+<div class="list-div" id="listDiv">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr align="center">
+	  <th width="10%"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" name="checkbox[]">编号</th>	
+      <th width="20%">用户名</td>
+      <th width="20%">邮箱</td>
+      <th width="20%">最后登录</td>
+      <th width="20%">创建时间</td>
+      <th width="10%">操作</td>
+    </tr>
+	{section name=loop loop=$admin_list}
+		<tr align="center">
+		  <td><span><input name="checkboxes[]" type="checkbox" value="{$admin_list[loop].id}" />{$admin_list[loop].id}</span></td>
+          <td class="first-cell">{$admin_list[loop].userid}</td>
+		  <td>{$admin_list[loop].email}</td>
+          <td>{$admin_list[loop].last_login_time}</td>
+          <td>{$admin_list[loop].add_time}</td>
+		  <td>
+          	<a href="admin.php?action=mod_admin&id={$admin_list[loop].id}&now_page={$now_page}">修改</a> | 
+          	<a href="javascript:void(0);" onclick="check_del('admin.php?action=del_admin&id={$admin_list[loop].id}&now_page={$now_page}')">删除</a>
+          </td>
+		</tr>  
+	{/section}
+    <tr>
+      <td>
+      	<input type="submit" value="批量删除" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+        <input type="hidden" value="{$now_page}" name="now_page"/>
+        <input type="hidden" value="{$admin_temp_path}" id="admin_temp_path"/>
+      </td>	
+      <td colspan="10" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{$pageshow}</td>
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>
+<script language="JavaScript" src="{$admin_temp_path}/js/select.js"></script>

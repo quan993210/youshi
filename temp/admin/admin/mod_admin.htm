@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理员信息修改</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery-1.4.2.min.js"></script>
+{literal}
+<script language="javascript">
+	function sel_p(type)
+	{
+		if (type == 0)
+		{
+			$("#p1").css("display", "");
+			$("#p2").css("display", "none");
+		}
+		else
+		{
+			$("#p1").css("display", "none");
+			$("#p2").css("display", "");
+		}
+	}
+</script>
+{/literal}
+</head>
+<body>
+<h1>
+<span class="action-span"><a href="javascript:history.back();">返回</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - 添加管理员 </span>
+<div style="clear:both"></div>
+</h1>
+<div id="tabbody-div">
+<form name="frm" action="admin.php?action=do_mod_admin&id={$admin.id}" method="post">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr>
+      <td class="label">用户名：</td>
+	  <td>{$admin.userid}</td>
+    </tr>
+	<tr>
+      <td class="label">密&nbsp;&nbsp;&nbsp;&nbsp;码：</td>
+	  <td><input type="password" name="pwd" value=""> <span class="note">（为空表示不修改）</span></td>
+    </tr>
+    <tr>
+      <td class="label">邮箱：</td>
+	  <td><input type="email" name="email" value="{$admin.email}"></td>
+    </tr>
+    <!--<tr>
+      <td class="label">权限：</td>
+	  <td>
+      	<input type="radio" name="pmn" value="0" onclick="sel_p(0);" {if $admin_group_id neq 0}checked{/if}>权限组  
+        <input type="radio" name="pmn" value="1" onclick="sel_p(1);" {if $admin_group_id eq 0}checked{/if}>自定义
+        <div id="p1" style="display:{if $admin_group_id eq 0}none{/if};">
+        	<select name="admin_group">
+            	{section name=loop loop=$admin_group}
+            	<option value="{$admin_group[loop].id}" {$admin_group[loop].sel}>{$admin_group[loop].name}</option>
+            	{/section}
+            </select>
+        </div>
+        <div id="p2" style="display:{if $admin_group_id neq 0}none{/if};">
+        	{section name=loop loop=$permission}
+            <input type="checkbox" value="{$permission[loop].code}" name="permission[]" {$permission[loop].chk} />{$permission[loop].name}<br />
+            {/section}
+        </div>
+      </td>
+    </tr>
+    --><tr>
+      <td colspan="2" align="center"><input type="submit" value="修改"></td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+</html>

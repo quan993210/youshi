@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+<script src="{$url_path}/js/utils.js"></script>
+<script src="{$admin_temp_path}/js/listtable.js"></script>
+{literal}
+<script>
+	function search_check()
+	{
+		if($("search_cat").value != 0)
+		{			
+			if($("keyword").value == "")
+			{
+				alert("请填写搜索关键字");
+				$("keyword").focus();
+				return false;
+			}
+		}
+		else
+		{
+			alert('请选择搜索类型');
+			return false;
+		}
+		return true;
+	}
+	
+	function check()
+	{
+		if(confirm("您确认删除这些吗？"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function check_del(url)
+	{
+		if(confirm("您是否确认删除改案例！"))
+		{
+			location.href = url;
+		}
+		
+		
+		return;
+	}
+</script>
+{/literal}
+</head>
+<h1>
+<span class="action-span"><a href="product.php?action=add_product">添加案例</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<body>
+<div class="form-div">
+  <form action="product.php" name="searchForm" onsubmit="">
+    <img src="{$admin_temp_path}/images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+    <select name="cid" id="cid">
+       	<option value="0">选择案例分类</option>
+       	{section name=loop loop=$product_category}
+       	<option value="{$product_category[loop].id}" {if $cid eq $product_category[loop].id}selected{/if}>{$product_category[loop].name}</option>
+    	{/section}
+    </select>  
+    关键字 <input type="text" name="keyword" id="keyword" value="{$keyword}"/>
+    <input type="submit" value="搜索" class="button" />
+  </form>
+</div>
+<form method="post" action="product.php?action=del_sel_product" name="listForm" onsubmit="return check()">
+<div class="list-div" id="listDiv">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr align="center">
+	  <th width="5%"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" name="checkbox[]">编号</th>	
+      <th width="15%">案例名称</td>
+      <th width="20%">案例行业</td>
+      <th width="15%">案例版本</td>
+      <th width="5%">首页推荐</td>
+      <th width="5%">是否启用</td>
+      <th width="5%">排序</td>
+      <th width="15%">添加时间</td>
+      <th width="15%">操作</td>
+    </tr>
+	{section name=loop loop=$product_list}
+		<tr align="center">
+		  <td><span><input name="checkboxes[]" type="checkbox" value="{$product_list[loop].id}" />{$product_list[loop].id}</span></td>
+          <td class="first-cell"><span onclick="listTable.edit(this, '{$tbl.tbl}','{$tbl.col1}', {$product_list[loop].id})" >{$product_list[loop].name}</span></td>
+          <td>{$product_list[loop].trade}</td>
+          <td>{if $product_list[loop].is_apple eq 1}apple{/if} {if $product_list[loop].is_android eq 1}android{/if} </td>
+          <td><img src="{$admin_temp_path}/images/{if $product_list[loop].is_index eq 1}yes{else}no{/if}.gif" onclick="listTable.toggle(this, '{$tbl.tbl}','{$tbl.col5}', {$product_list[loop].id})" style="cursor:pointer;" /></td>
+          <td><img src="{$admin_temp_path}/images/{if $product_list[loop].is_pub eq 1}yes{else}no{/if}.gif" onclick="listTable.toggle(this, '{$tbl.tbl}','{$tbl.col6}', {$product_list[loop].id})" style="cursor:pointer;" /></td>
+          <td>{$product_list[loop].order_num}</td>
+          <td>{$product_list[loop].add_time}</td>
+		  <td>
+          	<a href="product.php?action=mod_product&id={$product_list[loop].id}&now_page={$now_page}">修改</a> | 
+          	<a href="javascript:void(0);" onclick="check_del('product.php?action=del_product&id={$product_list[loop].id}&now_page={$now_page}');">删除</a> | 
+            <a href="/case/down.php?id={$product_list[loop].id}" target="_blank">下载地址</a>
+          </td>
+		</tr>  
+	{/section}
+    <tr>
+      <td>
+      	<input type="submit" value="批量删除" id="btnSubmit" name="btnSubmit" class="button" disabled="true" />
+        <input type="hidden" value="{$now_page}" name="now_page"/>
+        <input type="hidden" value="{$admin_temp_path}" id="admin_temp_path"/>
+      </td>
+      <td colspan="10" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{$pageshow}</td>
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>
+<script language="JavaScript" src="{$admin_temp_path}/js/select.js"></script>

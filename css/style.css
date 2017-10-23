@@ -1,0 +1,35 @@
+
+
+
+/* scroll */
+.scroll{width:1200px;margin:0 auto;position:relative;overflow:hidden;}
+.picbox{width:1200px;height:360px;overflow:hidden;position:relative;padding-bottom:25px;}
+.picbox ul{height:360px;}
+.piclist{position:absolute;left:0px;top:0px;}
+.swaplist{position:absolute;left:-2400px;top:0px;}
+
+/* btn */
+.og_prev, .og_next{width:32px;height:32px;position:absolute;bottom:0px;z-index:99;cursor:pointer;}
+.og_prev{left:46%;background:url(../images/ar3.png) no-repeat}
+.og_prev:hover{background:url(../images/ar2.png) no-repeat}
+.og_next{background:url(../images/ar4.png) no-repeat;right:47%;}
+.og_next:hover{background:url(../images/ar1.png) no-repeat}
+
+/* goodlist */
+.goodlist{width:221px;margin:23px 0;float:left;height:123px;margin-right:19px;}
+.goodlist .pics{overflow:hidden;display:block;float:left;width:223px;height:124px;}
+
+.goodlist div{float:right;width:130px;overflow:hidden;}
+
+
+.goodlist div a.exchange{font-size:12px;padding:4px 10px;text-align:center;#padding-top:6px;#padding-bottom:2px;color:#fff;display:none;text-decoration:none;background:#C75151;float:left;border-radius:2px;}
+.goodlist div a.exchange:hover{background:#973434;}
+.goodlist div p{padding:5px 0;}
+/********加入我们***********/
+.join-center{width:1200px;margin:0 auto;}
+.join-center .join-title{text-align:center;margin-bottom:50px}
+.newsBox .zp-list{width:1250px}
+.newsBox .zp-list  li{float:left;width:281px;margin-right:27px}
+.newsBox .zp-list  li .zp-zw{font-size:15px;height:30px;line-height:30px;margin-top:16px}
+.newsBox .zp-list  li .zp-place{margin-bottom:20px}
+.newsBox .zp-list  li .zp-zwyq{font-weight:600;margin:10px 0;color:#000}

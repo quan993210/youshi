@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+<script src="{$url_path}/js/utils.js"></script>
+<script src="{$admin_temp_path}/js/listtable.js"></script>
+{literal}
+<script>
+
+	
+	function check()
+	{
+		if(confirm("您确认删除这些吗？"))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function check_del(url)
+	{
+		if(confirm("您是否确认删除该会议！"))
+		{
+			location.href = url;
+		}
+		
+		
+		return;
+	}
+</script>
+{/literal}
+</head>
+<h1>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$metting.title}签到详情 </span>
+<div style="clear:both"></div>
+</h1>
+<body>
+
+<form method="post" action="" name="listForm" >
+<div class="list-div" id="listDiv">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr align="center">
+	  <th width="5%"><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" name="checkbox[]">编号</th>
+		<th width="15%">姓名</td>
+      <th width="20%">签到地址</td>
+		<th width="20%">签到时间</td>
+      <th width="10%">是否迟到</td>
+    </tr>
+	{section name=loop loop=$metting_sign}
+		<tr align="center">
+		  <td><span><input name="checkboxes[]" type="checkbox" value="{$metting_sign[loop].id}" />{$metting_sign[loop].id}</span></td>
+			<td class="first-cell"><span>{$metting_sign[loop].username}</span></td>
+			<td>{$metting_sign[loop].address}</td>
+          <td>{$metting_sign[loop].sign_time}</td>
+			<td>{$metting_sign[loop].status}</td>
+		</tr>  
+	{/section}
+    <tr>
+      <td>
+        <input type="hidden" value="{$now_page}" name="now_page"/>
+        <input type="hidden" value="{$admin_temp_path}" id="admin_temp_path"/>
+      </td>
+      <td colspan="10" align="right">&nbsp;&nbsp;&nbsp;&nbsp;{$pageshow}</td>
+    </tr>
+</table>
+</div>
+</form>
+</body>
+</html>
+<script language="JavaScript" src="{$admin_temp_path}/js/select.js"></script>

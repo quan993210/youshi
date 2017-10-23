@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{$page_title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{$admin_temp_path}/css/general.css" rel="stylesheet" type="text/css" />
+<link href="{$admin_temp_path}/css/main.css" rel="stylesheet" type="text/css" />
+<script src="{$url_path}/js/jquery.js"></script>
+{literal}
+<script>
+function add_one()
+{
+	var cat_count = $("#cat_count").val();
+	var next_one = parseInt(cat_count) + 1;
+	var html = '<div id="cat_'+next_one+'"><input type="text" name="cat_name'+next_one+'" value=""> <a href="javascript:void(0);" onclick="del_one('+next_one+')">[-]</a></div>';
+	$("#cat_td").append(html);
+	$("#cat_count").val(next_one);
+}
+function del_one(id)
+{
+	$("#cat_"+id).remove();
+}
+</script>
+{/literal}
+</head>
+<body>
+<h1>
+<span class="action-span"><a href="javascript:history.back();">返回</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - {$page_title} </span>
+<div style="clear:both"></div>
+</h1>
+<div id="tabbody-div">
+<form name="frm" action="product_category.php" method="post">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+	<tr>
+      <td class="label">选择产品分类：</td>
+	  <td>
+      	<select name="parent_id">
+        	<option value="">请选择产品分类</option>
+            {section name=loop loop=$top_product_category}
+            <option value="{$top_product_category[loop].id}" {if $cat.parent_id eq $top_product_category[loop].id}selected{/if}>{$top_product_category[loop].name}</option>	
+            {/section}
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td class="label">产品分类名称：</td>
+	  <td><input type="text" name="name" value="{$cat.name}"></td>
+    </tr>
+    <tr>
+      <td class="label">排序：</td>
+	  <td><input type="text" name="order_num" value="{if $cat.order_num}{$cat.order_num}{else}0{/if}"></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <input type="hidden" value="{$cat.id}" name="id" />
+      	<input type="hidden" value="{$action}" name="action" />
+      	<input type="hidden" value="{$now_page}" name="now_page" />
+      	<input type="submit" value="添加">
+      </td>
+    </tr>
+</table>
+</form>
+</div>
+</body>
+</html>

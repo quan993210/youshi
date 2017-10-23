@@ -1,0 +1,60 @@
+
+
+
+.examples_case{width:1234px}
+.examples_case ul li{float:left;margin-right:35px;margin-bottom:40px}
+.examples_case{min-height:1310px}
+.examples ul li b{color:#878787;padding-top:15px;display:block}
+
+.examples_body{overflow:hidden;}
+.aimg a:hover img{display:block;opacity:0.9;filter:alpha(opacity=90)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**设置遮挡块的布局**/
+
+
+
+
+
+.examples_body .img{
+	height: 255px;
+	width: 582px;
+}
+
+
+
+
+.examples_body .aimg{
+
+width:582px;
+height:257px;
+
+
+}
+.examples_body ul li{float:left;}
+.examples_body b{color:#878787;display:block;padding-top:20px}
+/*.examples_body ul li:nth-child(1),.examples_body ul li:nth-child(3){margin-right:35px;}
+.examples_body ul li:nth-child(1){margin-bottom:40px}*/
+.examples_body ul{width:1300px}
+.examples_body ul li{margin-right:35px;margin-bottom:40px}
+.examples_body .aimg img{
+width:582px;
+height:257px;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script src="{$url_path}/js/jquery.js"></script>
+<link href="{$admin_temp_path}/css/top.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="wrap">
+	<div class="sysname">{$sys_name}</div>	
+    <div class="logout"><span>欢迎您，{$admin}</span> <a href="index.php?action=logout">[退出]</a></div>
+    <ul>
+    	<li><a href="index.php?action=main" target="main-frame">后台首页</a></li>
+    	<li><a href="{$url_path}"  target="_blank">前台首页</a></li>
+        <li><a href="index.php?action=clear_cache" target="main-frame">清空缓存</a></li>
+        <li><a href="index.php?action=mod_pwd" target="main-frame">修改密码</a></li>
+        
+    </ul>
+</div>
+</body>
+</html>

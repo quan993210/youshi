@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>关于我们 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/general.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<script src="../js/common.js"></script>
+<script src="../js/prototype.js"></script>
+<script src="../js/utils.js"></script>
+<script src="js/listtable.js"></script>
+
+</head>
+<h1>
+<span class="action-span"><a href="add_admin_group.php">添加分组</a></span>
+<span class="action-span1"><a href="">{$sys_name} 管理中心</a>  - 管理员分组列表 </span>
+<div style="clear:both"></div>
+</h1>
+<body>
+<div class="list-div" id="listDiv">
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="1">
+    <tr align="center">
+	  <th><input onclick='listTable.selectAll(this, "checkboxes")' type="checkbox" name="checkbox[]">编号</th>	
+      <th width="10%">分组名称</td>
+      <th width="19%">创建时间</td>
+      <th width="23%">操作</td>
+    </tr>
+	{section name=loop loop=$admin_group}
+		<tr align="center">
+		  <td width="10%"><span><input name="checkboxes[]" type="checkbox" value="{$admin_group[loop].id}" />{$admin_group[loop].id}</span></td>
+		  <td class="first-cell">{$admin_group[loop].name}</td>
+		  <td>{$admin_group[loop].add_time}</td>
+		  <td>	
+          	<a href="mod_admin_group.php?id={$admin_group[loop].id}">修改</a> | 
+          	<a href="process.php?action=del_admin_group&id={$admin_group[loop].id}">删除</a>
+           </td>
+		</tr>  
+	{/section}
+    <tr>
+      <td colspan="4" align="center"></td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
+<script language="JavaScript" src="js/select.js"></script>

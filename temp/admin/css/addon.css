@@ -1,0 +1,16 @@
+/*
+addon.css 2012-3-16 宋
+*/
+body,div,p,form,ul,img,input,span,dd,dt {font-size:12px;margin:0;padding:0;}
+ul,li {list-style-type:none;}
+img {border:none;display:inline;}
+table {border-collapse:collapse;}
+p{margin:0px;}
+h1,h2,h3,h4,h5{font-size:12px; font-weight:normal; margin: 0;}
+
+.header{height:64px; background: #1f60a0; overflow:hidden;}
+.header .logo{width:776px;height:64px;float:left; background:url(../images/logohead.jpg) no-repeat;}
+.nav{height:26px; background:url(../images/nav.jpg) repeat-x;overflow:hidden;}
+.nav ul{padding:0 0 0 5px;}
+.nav li{width:74px;height:26px;line-height:26px;text-align:center;float:left;}
+.nav li.b{width:2px; background:url(../images/navb.jpg) 0 4px no-repeat;}
