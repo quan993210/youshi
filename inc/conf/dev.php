@@ -23,7 +23,7 @@ define('ADMIN_DIR', 	'admin/');
 define('MEMBER_DIR', 	'member/');
 
 //路径配置
-define('FILE_PATH', '/ChildrenDay');
+define('FILE_PATH', '');
 define('URL_PATH', 'http://' . $_SERVER['HTTP_HOST'] . FILE_PATH);
 define('FRONT_TEMP_PATH', 'http://' . $_SERVER['HTTP_HOST'] . FILE_PATH . '/' . TEMP_PAGE);
 define('ADMIN_TEMP_PATH', 'http://' . $_SERVER['HTTP_HOST'] . FILE_PATH . '/' . TEMP_ADMIN);

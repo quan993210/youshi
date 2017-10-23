@@ -56,28 +56,28 @@ function menu()
 	$sub[]  = array('url' => 'log.php', 				'name' => '日志管理');
 	$sub[]  = array('url' => 'admin.php', 				'name' => '管理员管理');
 	$sub[]  = array('url' => 'member.php', 				'name' => '会员列表');
-	$sub[]  = array('url' => 'news_category.php', 	'name' => '内容分类');
-	$sub[]  = array('url' => 'news.php', 			'name' => '内容列表');
-	$sub[]  = array('url' => 'dangfei.php', 			'name' => '党费列表');
-	$sub[]  = array('url' => 'metting.php', 			'name' => '会议列表');
-	$sub[]  = array('url' => 'carousel.php', 			'name' => '首页轮播图');
-
-	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
-	
-	//unset($sub);
-
-	//$menu[] = array('name' => '内容管理', 				'sub' => $sub);
-	
-	//unset($sub);
-	//$sub[]  = array('url' => 'product_category.php', 	'name' => '产品分类');
-	//$sub[]  = array('url' => 'product.php', 			'name' => '案例列表');
-	//$menu[] = array('name' => '案例管理', 				'sub' => $sub);
-	
-	unset($sub);
-	$sub[]  = array('url' => 'timu_category.php', 		'name' => '题目分类');
-	$sub[]  = array('url' => 'timu.php', 				'name' => '题目列表');
-	$sub[]  = array('url' => 'test.php', 				'name' => '测试试卷');
-	$menu[] = array('name' => '题目管理', 				'sub' => $sub);
+//	$sub[]  = array('url' => 'news_category.php', 	'name' => '内容分类');
+//	$sub[]  = array('url' => 'news.php', 			'name' => '内容列表');
+//	$sub[]  = array('url' => 'dangfei.php', 			'name' => '党费列表');
+//	$sub[]  = array('url' => 'metting.php', 			'name' => '会议列表');
+//	$sub[]  = array('url' => 'carousel.php', 			'name' => '首页轮播图');
+//
+//	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
+//
+//	//unset($sub);
+//
+//	//$menu[] = array('name' => '内容管理', 				'sub' => $sub);
+//
+//	//unset($sub);
+//	//$sub[]  = array('url' => 'product_category.php', 	'name' => '产品分类');
+//	//$sub[]  = array('url' => 'product.php', 			'name' => '案例列表');
+//	//$menu[] = array('name' => '案例管理', 				'sub' => $sub);
+//
+//	unset($sub);
+//	$sub[]  = array('url' => 'timu_category.php', 		'name' => '题目分类');
+//	$sub[]  = array('url' => 'timu.php', 				'name' => '题目列表');
+//	$sub[]  = array('url' => 'test.php', 				'name' => '测试试卷');
+//	$menu[] = array('name' => '题目管理', 				'sub' => $sub);
 
 	//unset($sub);
 	//$sub[]  = array('url' => 'merchant.php', 				'name' => '商户列表');
