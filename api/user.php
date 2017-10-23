@@ -26,6 +26,12 @@ switch ($action)
     case "login_openid":
         login_openid();
         break;
+    case "add_member_data":
+        add_member_data();
+        break;
+    case "add_share":
+        add_share();
+        break;
 }
 
 function bind_user(){
@@ -82,6 +88,58 @@ function login_openid(){
     }else{
         showapierror('参数错误！');
     }
+}
+
+function add_member_data(){
+    global $db;
+    $userid = $_POST['userid'] ? $_POST['userid'] : 0;
+    $name = $_POST['name'];
+    $mobile = $_POST['mobile'];
+    $school = $_POST['school'];
+    $kindergarten = $_POST['kindergarten'];
+    $is_certificate = $_POST['is_certificate'];
+    $add_time	= time();
+    $add_time_format	= now_time();
+    $sql = "INSERT INTO member_data (userid,name,mobile,school,kindergarten,is_certificate,add_time,add_time_format) VALUES ('{$userid}','{$name}', '{$mobile}', '{$school}', '{$kindergarten}', '{$is_certificate}', '{$add_time}', '{$add_time_format}')";
+    $db->query($sql);
+
+    //提交资料发送短信
+    $certificate = $is_certificate=1?"有":"无";
+    $param ="$name.',".$mobile.','.$kindergarten.','.$school.','.$certificate;
+    $data = sms($param);
+
+    //更新会员是否领取过
+    if($userid > 0){
+        $sql = "SELECT * FROM member WHERE userid = '{$userid}'";
+        $member = $db->get_row($sql);
+        $collect = $member['collect']+1;
+        $sql = "UPDATE member SET  collect = '{$collect}' WHERE userid = '{$userid}'";
+        $db->query($sql);
+    }
+
+
+    showapisuccess('','提交成功');
+}
+
+
+function add_share(){
+    global $db;
+    $userid = $_POST['userid'];
+    $sql = "SELECT * FROM member WHERE userid = '{$userid}'";
+    $member = $db->get_row($sql);
+    $share = $member['share'] =$member['share']+1;
+    $sql = "UPDATE member SET  share = '{$share}' WHERE userid = '{$userid}'";
+    $db->query($sql);
+    showapisuccess($member,'分享成功成功');
+}
+
+function data_num(){
+    global $db;
+    $sql 		= "SELECT COUNT(id) FROM member_data ";
+    $total 		= $db->get_one($sql);
+    $total = 500 - $total;
+    $data=[$total];
+    showapisuccess($data,'剩余资料');
 }
 
 
@@ -167,6 +225,30 @@ function https_request($url, $data = null)
     $output = curl_exec($curl);
     curl_close($curl);
     return $output;
+}
+
+function sms($param){
+    //载入ucpass类
+    require_once('lib/Ucpaas.class.php');
+
+//初始化必填
+    $options['accountsid']='7535bf1a400a40c7bde41a81cfe0da89';
+    $options['token']='24069b3e0cb5f9ecce2f7bf94855142d';
+
+
+//初始化 $options必填
+    $ucpass = new Ucpaas($options);
+
+//开发者账号信息查询默认为json或xml
+    header("Content-Type:text/html;charset=utf-8");
+
+//短信验证码（模板短信）,默认以65个汉字（同65个英文）为一条（可容纳字数受您应用名称占用字符影响），超过长度短信平台将会自动分割为多条发送。分割后的多条短信将按照具体占用条数计费。
+    $appId = "3cba4db84c384638b02018bf0be49af6";
+    $to = "18807913658,13807066031,18630796687"; //发给袁总，佳琦，勇昌
+    $templateId = "184713"; //短信模板id
+   // $param='袁卫明,18888888888,艾溪湖幼儿园,抚州崇仁师范,有'; //模板参数，这里填写申请人的手机号，短信内容：”国编新申请：用户袁卫明，号码是18888888888，就职于艾溪湖幼儿园，毕业于抚州崇仁师范，有幼师资格证。“
+
+   return $ucpass->templateSMS($appId,$to,$templateId,$param);
 }
 
 
