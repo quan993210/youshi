@@ -36,41 +36,35 @@ switch ($action)
 
 function bind_user(){
     global $db;
-    if(isset($_POST['code']) && !empty($_POST['code']) && isset($_POST['mobile']) && !empty($_POST['mobile'])) {
-        $mobile = addslashes(trim($_POST['mobile']));
-        $sql = "SELECT * FROM member WHERE mobile = '{$mobile}'";
-        $member = $db->get_row($sql);
-        if($member){
-            $code = $_POST['code'];
-            $encryptedData = $_POST['encryptedData'];
-            $iv = $_POST['iv'];
-            $session_key = wxCode($code);
-            $userInfo = decryptData($session_key,$encryptedData,$iv);
-            if ($userInfo && !empty($userInfo) && isset($userInfo['openId']) && !empty($userInfo['openId'])) {
-                $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openId']}'";
-                $member = $db->get_row($sql);
-                if($member['mobile'] == $mobile &&  $member && isset($member['openid']) && !empty($member['openid'])){
-                    showapisuccess($member);
-                }else{
-                    $nickname    	= $userInfo['nickName'];
-                    $openid    	= $userInfo['openId'];
-                    $avatar    	= $userInfo['avatarUrl'];
-                    $unionid    	= $userInfo['unionid'];
-                    $add_time	= time();
-                    $add_time_format	= now_time();
-                    $sql = "INSERT INTO member (openid, nickname, unionid,  avatar,add_time,add_time_format) VALUES ('{$openid}','{$nickname}','{$unionid}','{$avatar}', '{$add_time}', '{$add_time_format}')";
-                    $db->query($sql);
-
-                    $sql = "SELECT * FROM member WHERE mobile=$mobile";
-                    $member = $db->get_row($sql);
-                    showapisuccess($member);
-                }
+    if(isset($_POST['code']) && !empty($_POST['code'])) {
+        $code = $_POST['code'];
+        $encryptedData = $_POST['encryptedData'];
+        $iv = $_POST['iv'];
+        $session_key = wxCode($code);
+        $userInfo = decryptData($session_key,$encryptedData,$iv);
+        if ($userInfo && !empty($userInfo) && isset($userInfo['openId']) && !empty($userInfo['openId'])) {
+            $sql = "SELECT * FROM member WHERE openid = '{$userInfo['openId']}'";
+            $member = $db->get_row($sql);
+            if($member && isset($member['openid']) && !empty($member['openid'])){
+                showapisuccess($member);
             }else{
-                showapierror('参数错误！');
+                $nickname    	= $userInfo['nickName'];
+                $openid    	= $userInfo['openId'];
+                $avatar    	= $userInfo['avatarUrl'];
+                $unionid    	= $userInfo['unionid'];
+                $add_time	= time();
+                $add_time_format	= now_time();
+                $sql = "INSERT INTO member (openid, nickname, unionid,  avatar,add_time,add_time_format) VALUES ('{$openid}','{$nickname}','{$unionid}','{$avatar}', '{$add_time}', '{$add_time_format}')";
+                $db->query($sql);
+
+                $sql = "SELECT * FROM member WHERE openid=$openid";
+                $member = $db->get_row($sql);
+                showapisuccess($member);
             }
         }else{
-            showapierror('用户不存在！');
+            showapierror('参数错误！');
         }
+
 
     } else {
         showapierror('参数错误！');
