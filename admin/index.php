@@ -62,7 +62,7 @@ function menu()
 //	$sub[]  = array('url' => 'metting.php', 			'name' => '会议列表');
 //	$sub[]  = array('url' => 'carousel.php', 			'name' => '首页轮播图');
 //
-//	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
+	$menu[] = array('name' => '网站管理', 				'sub' => $sub);
 //
 //	//unset($sub);
 //
