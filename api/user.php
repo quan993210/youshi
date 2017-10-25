@@ -7,7 +7,7 @@
  * 绑定微信用户接口
  */
 define('APPID','wxdb2efeed7976fe30');
-define('APPSECRET',' d03366cff50d1e1207cb9488baf2e43c');
+define('APPSECRET','d03366cff50d1e1207cb9488baf2e43c');
 //AppID: wx6ce6752b26628e64
 //appSecret: 4ca37043b96c71c8224e0299e92d969e
 
@@ -57,7 +57,7 @@ function bind_user(){
                 $sql = "INSERT INTO member (openid, nickname, unionid,  avatar,add_time,add_time_format) VALUES ('{$openid}','{$nickname}','{$unionid}','{$avatar}', '{$add_time}', '{$add_time_format}')";
                 $db->query($sql);
 
-                $sql = "SELECT * FROM member WHERE openid=$openid";
+                $sql = "SELECT * FROM member WHERE openid='{$openid}'";
                 $member = $db->get_row($sql);
                 showapisuccess($member);
             }
@@ -148,11 +148,9 @@ function wxCode($code){
     }
 
     //拼装url
-    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=".APPID."&secret=".APPSECRET."&js_code=".$code."&grant_type=authorization_code ";
-
+    //$url = "https://api.weixin.qq.com/sns/jscode2session?appid=".APPID."&secret=".APPSECRET."&js_code=".$code."&grant_type=authorization_code ";
 
     $data = https_request($url);
-
     $result = json_decode($data,true);
 
 
