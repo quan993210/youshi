@@ -148,7 +148,7 @@ function wxCode($code){
     }
 
     //拼装url
-    //$url = "https://api.weixin.qq.com/sns/jscode2session?appid=".APPID."&secret=".APPSECRET."&js_code=".$code."&grant_type=authorization_code ";
+    $url = "https://api.weixin.qq.com/sns/jscode2session?appid=".APPID."&secret=".APPSECRET."&js_code=".$code."&grant_type=authorization_code ";
 
     $data = https_request($url);
     $result = json_decode($data,true);
