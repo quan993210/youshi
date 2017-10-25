@@ -32,6 +32,9 @@ switch ($action)
     case "add_share":
         add_share();
         break;
+    case "data_num":
+        data_num();
+        break;
 }
 
 function bind_user(){
@@ -99,7 +102,7 @@ function add_member_data(){
 
     //提交资料发送短信
     $certificate = $is_certificate=1?"有":"无";
-    $param ="$name.',".$mobile.','.$kindergarten.','.$school.','.$certificate;
+    $param =$name.','.$mobile.','.$kindergarten.','.$school.','.$certificate;
     $data = sms($param);
 
     //更新会员是否领取过
