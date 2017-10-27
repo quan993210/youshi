@@ -99,6 +99,9 @@ function add_member_data(){
     $add_time_format	= now_time();
     $sql = "INSERT INTO member_data (userid,name,mobile,school,kindergarten,is_certificate,add_time,add_time_format) VALUES ('{$userid}','{$name}', '{$mobile}', '{$school}', '{$kindergarten}', '{$is_certificate}', '{$add_time}', '{$add_time_format}')";
     $db->query($sql);
+    $id = $db->link_id->insert_id;
+    $sql = "SELECT * FROM member_data WHERE id = '{$id}'";
+    $member_data = $db->get_row($sql);
 
     //提交资料发送短信
     $certificate = $is_certificate=1?"有":"无";
@@ -113,9 +116,7 @@ function add_member_data(){
         $sql = "UPDATE member SET  collect = '{$collect}' WHERE userid = '{$userid}'";
         $db->query($sql);
     }
-
-
-    showapisuccess('','提交成功');
+    showapisuccess($member_data,'提交成功');
 }
 
 
